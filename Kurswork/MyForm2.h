@@ -161,7 +161,7 @@ namespace Kurswork {
 
 	}
 	public: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ fileName = "C:\\Users\\xxxxx\\Desktop\\Kursworkout\\Kurswork\\Kurswork\\test.txt"; //”казываем им€ файла
+		String^ fileName = "C:\\Users\\xxxxs\\Desktop\\kursovayarabota-master\\Kurswork\\test.txt"; //”казываем им€ файла
 		try {
 			StreamReader^ bin = File::OpenText(fileName); //—читываем текст из файла
 			array<String^>^ mas;
