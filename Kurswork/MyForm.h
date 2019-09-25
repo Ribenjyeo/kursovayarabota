@@ -17,7 +17,8 @@ namespace Kurswork {
 	
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
-		
+	public:
+		Client^ local1 = gcnew Client("New1", "New2", 100);
 	public:
 		MyForm(void)
 		{
@@ -154,16 +155,14 @@ namespace Kurswork {
 
 	private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ fileName = "C:\\Users\\xxxxs\\source\\repos\\Ribenjyeo\\kursovayarabota\\Kurswork\\test.txt"; //Указываем имя файла
-		Client^ local1 = gcnew Client();
-		local1->AddClient("New2", "New1", 100);
+
 
 		try {
 			StreamReader^ din = File::OpenText(fileName); //Считываем текст из файла
 			array<String^>^ mas;
 			mas = Regex::Split(din->ReadToEnd(), "\r\n");
 			din->Close(); //Закрываем прочитанный файл
-			
-
+		
 			
 			
 			if (local1->login == textBox1->Text && local1->password == textBox2->Text) {

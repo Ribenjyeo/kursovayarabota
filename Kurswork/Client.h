@@ -2,23 +2,19 @@
 using namespace std;
 using namespace System;
 
-ref class Client {
+public ref class Client {
 public:
-	String^ login;
-	String^ password;
+	String^ login = nullptr;
+	String^ password = nullptr;
 	int money;
 public:
-	Client() {};
-	~Client() {
-		delete login;
-		delete password;
-	}
-	void AddClient(String^ loginl, String^ passwordl, int moneyl) {
+	Client(String^ loginl, String^ passwordl, int moneyl) {
 		this->login = loginl;
+		loginl = gcnew String("");
 		this->password = passwordl;
+		passwordl = gcnew String("");
 		this->money = moneyl;
-	}
+	};
+	~Client() {};
 
 };
-
-
