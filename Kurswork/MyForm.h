@@ -1,6 +1,7 @@
 #pragma once
 #include "MyForm1.h"
 #include "Client.h"
+#include "Bank.h"
 namespace Kurswork {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -18,7 +19,14 @@ namespace Kurswork {
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
-		Client^ local1 = gcnew Client("New1", "New2", 100);
+		Client^ local1 = gcnew Client("admin", "admin", 100);
+		Client^ local2 = gcnew Client("Alex", "Kinsman", 5500);
+		Client^ local3 = gcnew Client("Hello", "world", 1500);
+		Client^ local4 = gcnew Client("Gorg", "Klasson", 500);
+		Bank^ ddf = gcnew Bank();
+
+		
+		
 	public:
 		MyForm(void)
 		{
@@ -150,54 +158,50 @@ namespace Kurswork {
 		}
 #pragma endregion
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		ddf->Mysd[0] = local1;
+		ddf->Mysd[1] = local2;
+		ddf->Mysd[2] = local3;
+		ddf->Mysd[3] = local4;
+		ddf->WriteToFile();
 		
 	}
 
 	private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ fileName = "C:\\Users\\xxxxs\\source\\repos\\Ribenjyeo\\kursovayarabota\\Kurswork\\test.txt"; //Указываем имя файла
-
-
 		try {
 			StreamReader^ din = File::OpenText(fileName); //Считываем текст из файла
 			array<String^>^ mas;
 			mas = Regex::Split(din->ReadToEnd(), "\r\n");
 			din->Close(); //Закрываем прочитанный файл
-		
-			
-			
-			if (local1->login == textBox1->Text && local1->password == textBox2->Text) {
-				MyForm1^ fr345 = gcnew MyForm1();
-				fr345->Show(this);
-				this->Hide();
-			}
 
 			int a = 0;
 			int b = 1;
+			
 
-			//for (int i = 0; i < mas->Length; i++) {
-			//	if (mas[a] == textBox1->Text && mas[b] == textBox2->Text) //Сравнием строки логина и пароля с значением в файле если  все правильно переходит на другой фрейм
-			//	{
-			//		int g = b + 1;
-			//		String^ money = g.ToString();
-			//		MyForm1^ fr1 = gcnew MyForm1(money);
-			//		fr1->Show(this);
-			//		this->Hide();
-			//		textBox1->Clear();
-			//		textBox2->Clear();
-			//		din->Close();
-			//		break;
-			//	}
-			//	a += 3;//В файле строкя хранятся как -> Логин, Пароль, Сумма. Перескакиваем через сумму этим образом
-			//	b += 3;
-			//	if (a && b > 100) //Если мы ничего не нашли то выводим ошибку и делаем фокус на textbox1
-			//	{
-			//		MessageBox::Show("Вы ввели не правильный логин или пароль", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			//		textBox1->Clear();
-			//		textBox2->Clear();
-			//		textBox1->Focus();	
-			//		break;
-			//	}
-			//}
+			for (int i = 0; i < mas->Length; i++) {
+				if ((mas[a] == textBox1->Text && mas[b] == textBox2->Text) || (ddf->Mysd[i]->login == textBox1->Text && ddf->Mysd[i]->password == textBox2->Text)) //Сравнием строки логина и пароля с значением в файле если  все правильно переходит на другой фрейм
+				{
+					int g = b + 1;
+					String^ money = g.ToString();
+					MyForm1^ fr1 = gcnew MyForm1(money);
+					fr1->Show(this);
+					this->Hide();
+					textBox1->Clear();
+					textBox2->Clear();
+					din->Close();
+					break;
+				}
+				a += 3;//В файле строкя хранятся как -> Логин, Пароль, Сумма. Перескакиваем через сумму этим образом
+				b += 3;
+				if (a && b > 100) //Если мы ничего не нашли то выводим ошибку и делаем фокус на textbox1
+				{
+					MessageBox::Show("Вы ввели не правильный логин или пароль", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					textBox1->Clear();
+					textBox2->Clear();
+					textBox1->Focus();	
+					break;
+				}
+			}
 		}
 		catch (Exception^ e) //Ловим исключение: Файл не найден и проблемы с чтением файла
 		{

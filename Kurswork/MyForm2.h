@@ -161,7 +161,7 @@ namespace Kurswork {
 
 	}
 	public: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ fileName = "C:\\Users\\xxxxs\\Desktop\\kursovayarabota-master\\Kurswork\\test.txt"; //Указываем имя файла
+		String^ fileName = "C:\\Users\\xxxxs\\source\\repos\\Ribenjyeo\\kursovayarabota\\Kurswork\\test.txt"; //Указываем имя файла
 		try {
 			StreamReader^ bin = File::OpenText(fileName); //Считываем текст из файла
 			array<String^>^ mas;
@@ -189,6 +189,7 @@ namespace Kurswork {
 					String^ check = walk.ToString();
 					int newmoney = Ioldmoney - walk;
 					String^ Snewmoney = newmoney.ToString();
+					
 
 					StreamWriter^ sw = gcnew StreamWriter(fileName); //Записываем в файл новую сумму
 					for (int i = 0; i < mas->Length; i++)
