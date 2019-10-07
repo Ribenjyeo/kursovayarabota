@@ -223,9 +223,10 @@ namespace Kurswork {
 			this->label11->Location = System::Drawing::Point(18, 362);
 			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(239, 18);
+			this->label11->Size = System::Drawing::Size(249, 18);
 			this->label11->TabIndex = 10;
-			this->label11->Text = L"ÐÀÇÌÅÐ ÊÎÌÈÑÈÈ ÏÀÎ ÄÎÐÎ";
+			this->label11->Text = L"ÐÀÇÌÅÐ ÊÎÌÈÑÈÈ ÏÀÎ ÄÎÁÐÎ";
+			this->label11->Click += gcnew System::EventHandler(this, &MyForm3::Label11_Click);
 			// 
 			// label12
 			// 
@@ -274,7 +275,7 @@ namespace Kurswork {
 				static_cast<System::Byte>(204)));
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MyForm3";
-			this->Text = L"×åê ïî îïåðàöèè";
+			this->Text = L"×åê ïî cíÿòèþ íàëè÷íûõ";
 			this->Load += gcnew System::EventHandler(this, &MyForm3::MyForm3_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -300,6 +301,8 @@ private: System::Void Label10_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
+}
+private: System::Void Label11_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

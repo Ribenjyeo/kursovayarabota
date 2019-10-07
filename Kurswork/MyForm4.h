@@ -207,7 +207,7 @@ namespace Kurswork {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MyForm4";
-			this->Text = L"Оплата сотовой связи";
+			this->Text = L"Оплата мобильной связи";
 			this->Load += gcnew System::EventHandler(this, &MyForm4::MyForm4_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
@@ -223,11 +223,11 @@ private: System::Void TextBox1_TextChanged(System::Object^ sender, System::Event
 
 }
 private: System::Void TextBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if ((e->KeyChar <= 48 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
+	if ((e->KeyChar <= 47 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
 		e->Handled = true;
 }
 private: System::Void TextBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if ((e->KeyChar <= 48 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
+	if ((e->KeyChar <= 47 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
 		e->Handled = true;
 }
 private: System::Void ComboBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
@@ -244,11 +244,22 @@ private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e
 		array<String^>^ mas;
 		mas = Regex::Split(bin->ReadToEnd(), "\r\n");
 		bin->Close(); //Закрываем прочитанный файл
-
+		int d = Convert::ToInt32(textBox1->Text);
+		int df = Convert::ToInt32(textBox2->Text);
 		if (textBox1->Text == "" && textBox2->Text == "") //Если текст отстутсвует
 		{
 			MessageBox::Show("Все поля должны быть заполнены", "Error");
 			
+		}
+		else if (d < 1) {
+			MessageBox::Show("Вы ввели 0", "Error");
+			textBox1->Clear();
+			textBox1->Focus();
+		}
+		else if (df < 1) {
+			MessageBox::Show("Вы ввели 0", "Error");
+			textBox2->Clear();
+			textBox2->Focus();
 		}
 		else {
 			String^ test1 = textBox2->Text;
@@ -280,7 +291,7 @@ private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e
 				if (textBox1->Text->Length < 10) {
 					MessageBox::Show("Телефон состоит из 10 цифр");
 				}
-				if (comboBox1->SelectedIndex < 0) {
+				else if (comboBox1->SelectedIndex < 0) {
 					MessageBox::Show("Выберите оператора!");
 				}
 				else {

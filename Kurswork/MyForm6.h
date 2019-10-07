@@ -105,6 +105,7 @@ namespace Kurswork {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(254, 25);
 			this->textBox2->TabIndex = 16;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm6::TextBox2_TextChanged);
 			this->textBox2->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm6::TextBox2_KeyPress);
 			// 
 			// label3
@@ -201,11 +202,11 @@ namespace Kurswork {
 	private: System::Void MyForm6_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void TextBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if ((e->KeyChar <= 48 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
+	if ((e->KeyChar <= 47 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
 		e->Handled = true;
 }
 private: System::Void TextBox2_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-	if ((e->KeyChar <= 48 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
+	if ((e->KeyChar <= 47 || e->KeyChar >= 59) && e->KeyChar != 8) //запрет на ввод всего кроме чисел
 		e->Handled = true;
 }
 private: System::Void ComboBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
@@ -222,11 +223,22 @@ private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e
 		array<String^>^ mas;
 		mas = Regex::Split(bin->ReadToEnd(), "\r\n");
 		bin->Close(); //Закрываем прочитанный файл
-
+		int d = Convert::ToInt32(textBox1->Text);
+		int df = Convert::ToInt32(textBox2->Text);
 		if (textBox1->Text == "" && textBox2->Text == "") //Если текст отстутсвует
 		{
 			MessageBox::Show("Все поля должны быть заполнены", "Error");
 
+		}
+		else if (d < 1) {
+			MessageBox::Show("Вы ввели 0", "Error");
+			textBox1->Clear();
+			textBox1->Focus();
+		}
+		else if (df < 1) {
+			MessageBox::Show("Вы ввели 0", "Error");
+			textBox2->Clear();
+			textBox2->Focus();
 		}
 		else {
 			String^ test1 = textBox2->Text;
@@ -258,7 +270,7 @@ private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e
 				if (textBox1->Text->Length < 7) {
 					MessageBox::Show("Лицевой счет состоит из 7 цифр");
 				}
-				if (comboBox1->SelectedIndex < 0) {
+				else if (comboBox1->SelectedIndex < 0) {
 					MessageBox::Show("Выберите провайдера!");
 				}
 				else {
@@ -283,6 +295,8 @@ private: System::Void Button1_Click(System::Object^ sender, System::EventArgs^ e
 
 private: System::Void ComboBox1_KeyPress_1(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 	comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList; //Запрещаем вводить в combobox собственные значения
+}
+private: System::Void TextBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

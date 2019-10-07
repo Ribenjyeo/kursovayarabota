@@ -167,12 +167,23 @@ namespace Kurswork {
 			array<String^>^ mas;
 			mas = Regex::Split(bin->ReadToEnd(), "\r\n");
 			bin->Close(); //Закрываем прочитанный файл
-
+			int d = Convert::ToInt32(textBox1->Text);
 			if (textBox1->Text == "") //Если текст отстутсвует
 			{
 				MessageBox::Show("Введите сумму снятия", "Error");
 				textBox1->Focus();
 			}
+			else if (d % 10 != 0) {
+				MessageBox::Show("Банкомат не может сумму с таким номиналом", "Error");
+				textBox1->Clear();
+				textBox1->Focus();
+			}
+			else if (d < 1) {
+				MessageBox::Show("Вы не можете снять 0 рублей", "Error");
+				textBox1->Clear();
+				textBox1->Focus();
+			}
+
 			else { 
 				String^ test1 = textBox1->Text;
 				int walk = Convert::ToInt32(test1);
@@ -219,7 +230,7 @@ namespace Kurswork {
 		}
 	}
 	private: System::Void TextBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) { //Запрет на все кроме цифр
-		if ((e->KeyChar <= 48 || e->KeyChar >= 59) && e->KeyChar != 8)
+		if ((e->KeyChar <= 47 || e->KeyChar >= 59) && e->KeyChar != 8)
 			e->Handled = true;
 	}
 };

@@ -176,9 +176,9 @@ namespace Kurswork {
 			this->label11->Location = System::Drawing::Point(19, 429);
 			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(239, 18);
+			this->label11->Size = System::Drawing::Size(249, 18);
 			this->label11->TabIndex = 40;
-			this->label11->Text = L"ÐÀÇÌÅÐ ÊÎÌÈÑÈÈ ÏÀÎ ÄÎÐÎ";
+			this->label11->Text = L"ÐÀÇÌÅÐ ÊÎÌÈÑÈÈ ÏÀÎ ÄÎÁÐÎ";
 			// 
 			// label10
 			// 
@@ -324,7 +324,7 @@ namespace Kurswork {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Name = L"MyForm7";
-			this->Text = L"MyForm7";
+			this->Text = L"×åê ïî îïëàòå èíòåðíåòà";
 			this->Load += gcnew System::EventHandler(this, &MyForm7::MyForm7_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
